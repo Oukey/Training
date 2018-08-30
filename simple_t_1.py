@@ -56,7 +56,7 @@ print('Наступила осень и люди стали заболевать
 battery = 100  # количество зарядов в процентах
 while (battery > 0):
     HID_human = random.randint(1, 10000)  # генератор встречных персонажей
-    if (HID_human % 5 and HID_human % 11):
+    if (HID_human % 5 == 0 and HID_human % 11 == 0):
         print('Вижу кого то с HID: ', HID_human, ' Стрелять не буду, это пока ещё человек...')
     else:
         battery = battery - 10
