@@ -27,7 +27,7 @@ Jhon = int(input('Сколько сундуков упер Джон? '))
 Jun = int(input('Джуну сколько досталось сундуков?'))
 if (Jack == Jhon == Jun):
     print('all equals')
-elif (Jack != Jhon != Jun != Jack):
+elif (Jack != Jhon and Jack != Jun and Jhon != Jun):
     print('all different')
 else:
     print('equal or different"')
