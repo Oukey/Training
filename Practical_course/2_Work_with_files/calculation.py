@@ -34,7 +34,6 @@ def res_files(n, m):
     И возвращает сумму чисел в двух файлах
     '''
     if sum_file(n) and sum_file(m):
-        # output_info()
         return sum_file(n) + sum_file(m)
     print('Получены не корректные данные!')
 
