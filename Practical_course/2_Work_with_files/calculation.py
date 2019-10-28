@@ -22,10 +22,11 @@ def sum_file(name):
                     break
             if lines == 3 and check is True:
                 return sum
-            else:
-                print("В файле '{}.txt' не корректные данные!".format(name))
+            # else:
+            #     print("В файле '{}.txt' не корректные данные!".format(name))
     except FileNotFoundError:
-        print("Файл с именем '{}.txt' - недоступен!".format(name))
+        return None
+        # print("Файл с именем '{}.txt' - недоступен!".format(name))
 
 
 def res_files(n, m):
@@ -36,7 +37,7 @@ def res_files(n, m):
     if sum_file(n) and sum_file(m):
         # output_info()
         return sum_file(n) + sum_file(m)
-    print('Получены не корректные данные!')
+    # print('Получены не корректные данные!')
 
 
 rand_num_1 = random.randint(1, 10)
