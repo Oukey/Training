@@ -19,11 +19,6 @@ def unique_users(res):
     return set(user_list)
 
 
-def get_len_users(res):
-    '''Функция возвращает количество уникальных пользователей'''
-    return len(unique_users(res))
-
-
 def original_tasks(res):
     '''Функция возвращает словарь с выполненными заданиями по каждому пользователю'''
     summary = {}
