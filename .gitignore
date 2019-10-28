@@ -2,3 +2,4 @@
 *.log
 .idea/
 *venv/
+/Practical_course/2_Work_with_files/test_files.py
