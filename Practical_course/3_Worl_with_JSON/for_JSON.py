@@ -15,7 +15,7 @@ for el in result:
         user[el['userId']] = {'num': 0, 'comp': 0}
     if el['id']:
         user[el['userId']]['num'] += 1
-    if el['completed'] is True:
+    if el['completed']:
         user[el['userId']]['comp'] += 1
 
 # Вывод рещультата на экран
