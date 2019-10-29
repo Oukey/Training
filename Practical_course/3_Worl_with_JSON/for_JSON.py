@@ -3,39 +3,24 @@ import requests
 
 response = requests.get("https://jsonplaceholder.typicode.com/todos")
 result = json.loads(response.text)
-s = json.dumps(result, indent=1)
 
-# Сохранение данных в json файл
+# # Сохранение данных в json файл
 with open("file_api.json", "wt") as file_api:
     json.dump(result, file_api, indent=1)
 
+# Подсчет количества заданий и выполненных заданий каждого пользователя
+user = {}
+for el in result:
+    if el['userId'] not in user.keys():
+        user[el['userId']] = {'num': 0, 'comp': 0}
+    if el['id']:
+        user[el['userId']]['num'] += 1
+    if el['completed'] is True:
+        user[el['userId']]['comp'] += 1
 
-# Подсчет количества уникальных пользователей в наборе
-def unique_users(res):
-    ''' Функция определения уникальных пользователей '''
-    user_list = []
-    for i in range(len(res)):
-        user_list.append(res[i].get('userId'))
-    return set(user_list)
-
-
-def original_tasks(res):
-    '''Функция возвращает словарь с выполненными заданиями по каждому пользователю'''
-    summary = {}
-    user_list = unique_users(res)
-    for i in user_list:
-        summary[i] = {'task': 0, 'completed': 0}
-        for el in range(len(res)):
-            if res[el]['userId'] == i:
-                summary[i]['task'] += 1
-                if res[el]['completed'] is True:
-                    summary[i]['completed'] += 1
-    return summary
-
-
-user = original_tasks(result)
+# Вывод рещультата на экран
 for i in user:
-    print('Пользователь {}. Количество задач {} из них выполнено {}.'.format(i, user[i]['task'], user[i]['completed']))
+    print('Пользователь {}. Количество задач {} из них выполнено {}.'.format(i, user[i]['num'], user[i]['comp']))
 # Пользователь 1. Количество задач 20 из них выполнено 11.
 # Пользователь 2. Количество задач 20 из них выполнено 8.
 # Пользователь 3. Количество задач 20 из них выполнено 7.
