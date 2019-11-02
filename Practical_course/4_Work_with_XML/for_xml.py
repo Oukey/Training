@@ -15,21 +15,20 @@ def output_lvl(xml_file):
     for elem in root:
         if len(elem) > 0:
             for lvl in elem:
-                print(lvl.tag, lvl.attrib['name'], lvl.text)
+                print(lvl.tag, lvl.get("name"), lvl.text)
 
 
 def get_node_value(xml_file, tag=None):
     '''Функция формирует список всех значений для конкретного тэга если задано его название'''
     root = get_root(xml_file)
     nod_list = []
-    for elem in root:
-        if elem.tag == tag:
-            if len(elem) == 0:
-                nod_list.append(elem.text)
-            else:
-                for lvl in elem:
-                    # nod_list.append(lvl.get("name") + ' ' + lvl.text)
-                    nod_list.append(lvl.text)
+    def search(el, n_list):
+        for i in el:
+            if i.tag == tag:
+                n_list.append(i.text)
+            if len(i) > 0:
+                search(i, n_list)
+    search(root, nod_list)
     return nod_list
 
 
@@ -43,11 +42,11 @@ def count_nodes(xml_file, atr):
     return count
 
 
-
-
 if __name__ == "__main__":
     output_lvl("demo.xml")
-    # print(get_node_value("demo.xml", 'languages'))
-    # print(get_node_value("demo.xml", 'pc'))
-    # print(get_node_value("demo.xml", 'sex'))
+    print(get_node_value("demo.xml", 'languages'))
+    print(get_node_value("demo.xml", 'language'))
+    print(get_node_value("demo.xml", 'pc'))
+    print(get_node_value("demo.xml", 'pc_item'))
+    print(get_node_value("demo.xml", 'sex'))
     print(count_nodes("demo.xml", 'name'))
