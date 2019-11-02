@@ -22,12 +22,14 @@ def get_node_value(xml_file, tag=None):
     '''Функция формирует список всех значений для конкретного тэга если задано его название'''
     root = get_root(xml_file)
     nod_list = []
+
     def search(el, n_list):
         for i in el:
             if i.tag == tag:
                 n_list.append(i.text)
             if len(i) > 0:
                 search(i, n_list)
+
     search(root, nod_list)
     return nod_list
 
