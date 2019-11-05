@@ -1,0 +1,13 @@
+<data>
+    <name>Petya</name>
+    <sex>true</sex>
+    <age>23</age>
+    <languages>
+        <language name="Python">9</language>
+        <language name="Java">7</language>
+    </languages>
+    <pc>
+        <pc_item name="os">Linux</pc_item>
+        <pc_item name="64">ram</pc_item>
+    </pc>
+</data>
