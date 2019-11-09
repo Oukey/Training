@@ -22,14 +22,15 @@ def get_list_nodes(root, tag):
     Функция получает корневой узел
     """
     list_node = []
-    for nod in root.iter():
-        if nod.tag == tag:
-            list_node.append(nod)
+    for elem in root.iter():
+        # list_node = elem.findall(tag)
+        if elem.tag == tag:
+            list_node.append(elem)
     return list_node
 
 
 def parent_search(xml_file, tag):
-    """Функция поиска родителя разанного узла"""
+    """Функция поиска родителя занного узла"""
     root = get_root(xml_file)
     for elem in root.iter():
         if elem.findall(tag):
@@ -38,7 +39,12 @@ def parent_search(xml_file, tag):
 
 def remove_nodes(xml_file, tag):
     """ Функция удаления всех узлов по заданному тегу """
-    pass
+    root = get_root(xml_file)
+    for elem in root.iter():
+        result = elem.findall(tag)
+        for node in result:
+            elem.remove(node)
+    return root
 
 
 # def output_elem(xml_file):
@@ -46,3 +52,27 @@ def remove_nodes(xml_file, tag):
 #     for elem in root.iter():
 #         print(elem.tag)
 
+tag = 'pc_item'
+root = get_root('demo.xml')
+for el in root.iter():
+    print(el)
+
+root = remove_nodes('demo.xml', tag)
+# for elem in root.iter():
+#     res = elem.findall(tag)
+#     for el in res:
+#         elem.remove(el)
+
+
+print('-' * 50)
+for el in root.iter():
+    print(el)
+
+# item = root.find(tag)
+# print('!!!--{}--!!!'.format(item))
+
+
+l = []
+
+for e in l:
+    print('+')
