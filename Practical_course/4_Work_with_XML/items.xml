@@ -6,6 +6,7 @@
     <languages>
         <language name="Python">9</language>
         <language name="Java">7</language>
+        <language name="PHP">7</language>
     </languages>
     <pc>
         <pc_item name="os">Linux</pc_item>

@@ -43,13 +43,16 @@ itm_pc1.set('name', '64')
 # fil.write(serialze)
 
 # Поиск информации в XML-документа
+print('!' * 10)
 for lng in itm_langs.findall('language'):
     print(lng.text)
 
+print('!' * 10)
 item = data.find('pc')
 for subitem in item.findall('pc_item'):
     print(subitem.text)
 
+print('!' * 10)
 # Перебор всех узлов итератором iter()
 for item in data.iter():
     print(item.tag, item.text, item.attrib)
@@ -61,6 +64,7 @@ itm_sex.set("sex2", 'false')
 # Удаление атрибута
 itm_sex.attrib.pop("sex2")
 
+print('!' * 10)
 # Удаление всех дочурних узлов
 itm_langs.clear()
 
