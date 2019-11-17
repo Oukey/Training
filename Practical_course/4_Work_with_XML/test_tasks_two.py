@@ -47,6 +47,9 @@ class MyTestCase(unittest.TestCase):
         # Поиск родителя отсутствующего узла
         parent = tt.parent_search(xml, tt.get_elem(xml, 'missing'))
         self.assertIsNone(parent)
+        parent = tt.parent_search(xml, tt.get_elem(xml, 'data'))
+        self.assertIsNone(parent)
+
 
     def test_remove_nodes(self):
         """Тест функции удаления елементов по заданному тегу"""
