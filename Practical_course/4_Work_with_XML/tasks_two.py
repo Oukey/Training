@@ -1,92 +1,48 @@
 # -*- coding: utf-8 -*-
 """Работа с XML-файлами. Часть вторая"""
 
-import xml.etree.ElementTree as ETree
 
-
-def get_root(xml_file="demo.xml"):
-    """Функция возвращает корневой узел"""
-    xml2 = ETree.parse(xml_file)
-    return xml2.getroot()
-
-
-def get_elem(tag):
-    """ """
-    s = 0
-    for node in root.iter():
-        return node.findall(tag)
-    # return s
-
-
-# def get_list_nodes(root, tag):
-def get_list_nodes(root, tag):
+def get_list_nodes(xml, tag):
     """
-    Функция формирует и возвращает список всех узлов по заданному тегу
-    Функция получает корневой узел
+    Функция принимает дерево xml документа и тэг для поиска.
+    Формирует и возвращает список всех узлов по заданному тегу
     """
-    list_node = []
-    for elem in root.iter():
-        list_node += elem.findall(tag)
-    return list_node
+    list_nodes = []
+    for element in xml.iter():
+        list_nodes += element.findall(tag)
+    return list_nodes
 
 
-# def parent_search(xml_file, element):
-# def parent_search(xml_file, tag):
-def parent_search(element):
-    """Функция поиска родителя заданного узла"""
-    for node in root.iter():
-        if element in node:
-            return node
-
-    # root = get_root(xml_file)
-    # for elem in root.iter():
-    #     if elem.findall(tag):
-    #         return elem
+def parent_search(xml, node):
+    """
+    Функция поиска родилеля заданного узла.
+    Принимает дерево xml документа и ссылку на узел.
+    Возвращает ссылку на родительский узел
+    """
+    for element in xml.iter():
+        if node in element:
+            return element
 
 
-def remove_nodes(xml_file, tag):
-    """ Функция удаления всех узлов по заданному тегу """
-    root = get_root(xml_file)
-    for elem in root.iter():
-        result = elem.findall(tag)
-        for node in result:
-            elem.remove(node)
-    return root
+def remove_nodes(xml, tag):
+    """
+    Функция удаления всех узлов по заданному тегу
+    Принимает дерево xml документа и тег
+    """
+    new_xml = xml
+    for element in new_xml.iter():
+        result = element.findall(tag)
+        if result:
+            for node in result:
+                element.remove(node)
+    return new_xml
 
 
-root = get_root('demo.xml')
-root1 = get_root('demo.xml')
-elem_list = []
-elem_list1 = []
-for elem in root.iter():
-    elem_list.append(elem)
-    # print(elem.attrib)
-for elem in root1.iter():
-    elem_list1.append(elem)
-print(elem_list)
-print(elem_list1)
-print('!!!' * 10, elem_list[1].find('.//'))
-
-print(elem_list1[3] in elem_list[0])
-print(type(elem_list[1]))
-print('+' * 40)
-print(get_elem('pc_item'))
-print('+' * 40)
-# print(parent_search('demo.xml', elem_list[2]))
-# print(parent_search(elem_list[2]))
-print('+' * 40)
-print(parent_search(get_elem('language')))
-
-
-tree = ETree.parse('demo.xml')
-root = tree.getroot()
-l1 = []
-l2 = []
-for elem in tree.iter():
-    l1.append(elem)
-for node in root.iter():
-    l2.append(node)
-print(l1)
-print(l2)
-print(l1[2].tag)
-# print(ETree.dump(l1[1]))
+def get_elem(xml, tag):
+    """
+    Вспомогательная функция возврата элемента по тегу
+    """
+    for element in xml.iter():
+        result = element.findall(tag)
+        if result:
+            return result[0]

@@ -51,7 +51,7 @@ def remove_nodes(xml, tag):
 
 def get_elem(xml, tag):
     """
-    Вспомогательная функция возвращаета элемента по тегу
+    Вспомогательная функция возврата элемента по тегу
     """
     for element in xml.iter():
         result = element.findall(tag)
