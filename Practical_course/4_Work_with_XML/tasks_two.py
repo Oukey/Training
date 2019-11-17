@@ -22,6 +22,7 @@ def parent_search(xml, node):
     for element in xml.iter():
         if node in element:
             return element
+    return None
 
 
 def remove_nodes(xml, tag):
