@@ -44,21 +44,42 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(parent.tag, 'data')
         parent = tt.parent_search(xml, tt.get_elem(xml, 'language'))
         self.assertEqual(parent.tag, 'languages')
+        # Поиск родителя отсутствующего узла
+        parent = tt.parent_search(xml, tt.get_elem(xml, 'missing'))
+        self.assertIsNone(parent)
 
     def test_remove_nodes(self):
         """Тест функции удаления елементов по заданному тегу"""
         xml = ETRee.parse('demo.xml')
         list_node = tt.get_list_nodes(xml, 'pc_item')
         self.assertEqual(len(list_node), 4)
+        len_ = 0
+        for _ in xml.iter():
+            len_ += 1
+        self.assertEqual(len_, 13)
+        test_missing = tt.remove_nodes(xml, 'missing')
+        len_xml = 0
+        for _ in test_missing.iter():
+            len_xml += 1
+        self.assertEqual(len_xml, 13)
+
         new_xml = tt.remove_nodes(xml, 'pc_item')
         list_node = tt.get_list_nodes(new_xml, 'pc_item')
         self.assertEqual(list_node, [])
+        len_xml = 0
+        for _ in new_xml.iter():
+            len_xml += 1
+        self.assertEqual(len_xml, 9)
 
         new_xml1 = tt.remove_nodes(new_xml, 'languages')
         list_language = tt.get_list_nodes(new_xml1, 'language')
         list_languages = tt.get_list_nodes(new_xml1, 'languages')
         self.assertEqual(len(list_language), 0)
         self.assertEqual(list_languages, [])
+        len_xml1 = 0
+        for _ in new_xml1.iter():
+            len_xml1 += 1
+        self.assertEqual(len_xml1, 5)
 
 
 if __name__ == '__main__':
