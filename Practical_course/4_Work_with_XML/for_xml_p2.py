@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ETree
 # Создание корневого узла
 data = ETree.Element('data')
 
-# СОздание дочерних узлов
+# Создание дочерних узлов
 itm_name = ETree.SubElement(data, 'name')
 itm_sex = ETree.SubElement(data, 'sex')
 itm_age = ETree.SubElement(data, 'age')
