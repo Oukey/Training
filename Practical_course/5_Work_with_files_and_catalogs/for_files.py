@@ -28,7 +28,7 @@ def dir_removal(name_dir):
         if len(list_dir) == 0:  # Если указанный каталог пустой
             os.rmdir(name_dir)
             return True
-        else:  # Если есть вложенные елементы
+        else:  # Если есть вложенные элементы
             os.chdir(name_dir)  # Переход в каталог
             for elem in list_dir:  # Проверка на наличие подкаталогов
                 if os.path.isdir(elem):
@@ -36,7 +36,7 @@ def dir_removal(name_dir):
             # Если нет подкаталогов происходит удаление вложенных файлов
             for elem in list_dir:
                 os.remove(elem)
-            os.chdir('../')  # возврвт в рабочий каталог дял удаления каталога
+            os.chdir('../')  # возврат в рабочий каталог для удаления каталога
             os.rmdir(name_dir)
             return True
     else:
