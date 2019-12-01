@@ -18,19 +18,26 @@ def data_lists(name=None):
     return list_files, list_catalogs
 
 
-def dir_removal(name):
+def dir_removal(name_dir):
     """
     Функция удаления каталога со всеми файлами если в нем нет подкаталогов
     При удачном удалении возвращает True, иначе False
     """
-    files = data_lists(name)[0]
-    catalogs = data_lists(name)[1]
-    if os.path.isdir(name) and len(catalogs) == 0:
-        if len(files) > 0:
-            os.chdir(name)  # переход в каталог для удаления вложенных файлов
-            for file in files:
-                os.remove(file)
-        os.chdir('../')  # возврат в "рабочий" каталог
-        os.rmdir(name)
-        return True
-    return False
+    if os.path.isdir(name_dir):  # Если указанный каталог существует
+        list_dir = os.listdir(name_dir)
+        if len(list_dir) == 0:  # Если указанный каталог пустой
+            os.rmdir(name_dir)
+            return True
+        else:  # Если есть вложенные елементы
+            os.chdir(name_dir)  # Переход в каталог
+            for elem in list_dir:  # Проверка на наличие подкаталогов
+                if os.path.isdir(elem):
+                    return False
+            # Если нет подкаталогов происходит удаление вложенных файлов
+            for elem in list_dir:
+                os.remove(elem)
+            os.chdir('../')  # возврвт в рабочий каталог дял удаления каталога
+            os.rmdir(name_dir)
+            return True
+    else:
+        return False
