@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Работа с документами"""
+"""Работа с документами doc"""
+
+# pip install python-docx
 
 from docx import Document
 
