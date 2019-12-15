@@ -5,6 +5,7 @@ import os.path
 import random
 from docx import Document
 from openpyxl import Workbook, load_workbook, utils
+import PyPDF2
 
 
 def string_replacement(file_name, str1, str2):
@@ -32,11 +33,11 @@ def string_replacement(file_name, str1, str2):
                             document.save(file_name)
                             return True
         except ValueError:
-            print('Неверный формат файла!')
+            print('Неверный фsdfормат файла!')
     return False
 
 
-def fil_square(file_name):
+def file_square(file_name):
     """
     Функция открывает excel-файл по заданному имени.
     На случайном листе заполняет квадрат 12*12 ячеек случайными значениями
@@ -58,5 +59,20 @@ def fil_square(file_name):
         except utils.exceptions.InvalidFileException:
             print('Не поддерживается формат файла!')
     return False
+
+
+def read_PDF(file_name, page):
+    """
+    Функция выводит информацию из PDF файла
+    """
+    if os.path.isfile(file_name):
+        with open(file_name, 'rb') as file:
+            read_pdf = PyPDF2.PdfFileReader(file)
+            number_pages = read_pdf.getNumPages()
+            if page <= number_pages:
+                page_content = read_pdf.getPage(page-1).extractText()
+                return page_content.encode('utf-8')
+
+
 
 
