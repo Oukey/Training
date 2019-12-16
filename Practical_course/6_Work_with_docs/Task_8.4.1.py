@@ -52,7 +52,9 @@ def file_square(file_name):
             # заполнение ячеек случайными  числами
             for x in range(1, 13):
                 for y in range(1, 13):
-                    selected_sheet.cell(row=x, column=y, value=random.randint(0, 101))
+                    selected_sheet.cell(
+                        row=x, column=y, value=random.randint(
+                            0, 101))
             excel_file.save(filename=file_name)
             return True
         # except ValueError:
@@ -63,16 +65,13 @@ def file_square(file_name):
 
 def read_PDF(file_name, page):
     """
-    Функция выводит информацию из PDF файла
+    Функция принимает имя файла и номер страницы.
+    Если файл найден и страница указана корректно в консоль выводится считанная информация
     """
     if os.path.isfile(file_name):
         with open(file_name, 'rb') as file:
             read_pdf = PyPDF2.PdfFileReader(file)
             number_pages = read_pdf.getNumPages()
             if page <= number_pages:
-                page_content = read_pdf.getPage(page-1).extractText()
+                page_content = read_pdf.getPage(page - 1).extractText()
                 return page_content.encode('utf-8')
-
-
-
-
