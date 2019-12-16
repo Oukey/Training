@@ -33,7 +33,7 @@ def string_replacement(file_name, str1, str2):
                             document.save(file_name)
                             return True
         except ValueError:
-            print('Неверный фsdfормат файла!')
+            print('Неверный формат файла!')
     return False
 
 
@@ -57,7 +57,6 @@ def file_square(file_name):
                             0, 101))
             excel_file.save(filename=file_name)
             return True
-        # except ValueError:
         except utils.exceptions.InvalidFileException:
             print('Не поддерживается формат файла!')
     return False
